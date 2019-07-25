@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/auth0-samples/auth0-spring-security5-api-sample.svg?style=svg)](https://circleci.com/gh/auth0-samples/auth0-spring-security5-api-sample)
 
-These samples demonstrate how to create an API with Spring Boot 2 and Spring Security 5, which only permits access to resources if a valid **access token** is included. 
+These samples demonstrate how to create an API with Spring Boot 2 and Spring Security 5, which only permits access to resources if a valid **access token** is included.
 
 These samples do not demonstrate how to sign a JWT but rather assume that a user has already been authenticated by Auth0 and holds an access token for API access. For information on how to use Auth0 to authenticate users, see [the docs](https://auth0.com/docs).
 
