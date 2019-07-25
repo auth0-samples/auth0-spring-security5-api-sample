@@ -15,3 +15,4 @@ spring:
           # Replace with the domain of your Auth0 tenant.
           # Note the trailing slash is important!
           issuer-uri: https://{DOMAIN}/
+          
