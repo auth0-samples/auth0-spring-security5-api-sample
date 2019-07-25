@@ -1,0 +1,138 @@
+version: 2.1
+
+commands:
+  run-sample:
+    description: "Build, test, and run the sample"
+    parameters:
+      sample:
+        type: string
+    steps:
+      - attach_workspace:
+          at: ~/
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum  "<<parameters.sample>>/build.gradle" }}
+            - v1-dependencies-
+      - run:
+          name: Assemble and run tests
+          working_directory: <<parameters.sample>>
+          command: ./gradlew clean build
+      - save_cache:
+          key: v1-dependencies{{ checksum  "<<parameters.sample>>/build.gradle" }}
+          paths:
+            - ~/.gradle
+
+      # Store test results - see https://circleci.com/docs/2.0/collect-test-data/#gradle-junit-test-results
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/test-results/junit/ \;
+      - store_test_results:
+          path: ~/test-results
+      - store_artifacts:
+          path: ~/test-results/junit
+
+      # Setup environment, start the app and wait for it to come online
+      - run:
+          name: Setup Auth0 environment
+          working_directory: <<parameters.sample>>/src/main/resources/
+          command: |
+            mv application.yml.example application.yml
+            sed -i 's|{DOMAIN}|'$auth0_domain'|g' application.yml
+            sed -i 's|{API_IDENTIFIER}|'$api_identifier'|g' application.yml
+      - run:
+          name: Start server
+          working_directory: <<parameters.sample>>
+          command: ./gradlew bootRun
+          background: true
+      - run:
+          name: Wait until server is online
+          command: |
+            attempt_counter=0
+            max_attempts=15
+            until $(curl --silent --head --output /dev/null --fail http://localhost:3010/api/public); do
+                if [ ${attempt_counter} -eq ${max_attempts} ];then
+                  echo "Could not reach server"
+                  exit 1
+                fi
+                attempt_counter=$(($attempt_counter+1))
+                sleep 5
+            done
+
+  run-functional-tests:
+    description: "Run the functional tests"
+    parameters:
+      webflux:
+        type: boolean
+        default: false
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: Prepare tests
+          working_directory: test
+          command: |
+            echo "AUTH0_DOMAIN=$auth0_domain" >> .env
+            echo "API_IDENTIFIER=$api_identifier" >> .env
+            echo "AUTH0_CLIENT_ID_1=$client_id_scopes_none" >> .env
+            echo "AUTH0_CLIENT_SECRET_1=$client_secret_scopes_none" >> .env
+            echo "AUTH0_CLIENT_ID_2=$client_id_scopes_read" >> .env
+            echo "AUTH0_CLIENT_SECRET_2=$client_secret_scopes_read" >> .env
+            echo "AUTH0_CLIENT_ID_3=$client_id_scopes_write" >> .env
+            echo "AUTH0_CLIENT_SECRET_3=$client_secret_scopes_write" >> .env
+            echo "AUTH0_CLIENT_ID_4=$client_id_scopes_readwrite" >> .env
+            echo "AUTH0_CLIENT_SECRET_4=$client_secret_scopes_readwrite" >> .env
+            echo "API_URL=http://localhost:3010" >> .env
+            npm install
+      - run:
+          name: Execute automated tests
+          working_directory: test
+          command: |
+            if <<parameters.webflux>>; then
+                quickstart="spring5-webflux" npm test
+            else
+                npm test
+            fi
+
+jobs:
+  checkout:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: Clone test script
+          command: git clone https://github.com/auth0-samples/api-quickstarts-tests test
+      - persist_to_workspace:
+          root: ~/ 
+          paths:
+            - project
+            - test
+  authorization-mvc:  
+    machine: true
+    steps:
+      - run-sample:
+          sample: "01-Authorization-MVC"
+      - run-functional-tests
+  authorization-webflux:
+    machine: true
+    steps:
+      - run-sample:
+          sample: "01-Authorization-WebFlux"
+      - run-functional-tests:
+          webflux: true
+
+workflows:
+  version: 2
+  API-Tests:
+    jobs:
+      - checkout:
+          context: Quickstart API Tests
+      - authorization-mvc:
+          context: Quickstart API Tests
+          requires:
+            - checkout
+      - authorization-webflux:
+          context: Quickstart API Tests
+          requires:
+            - checkout

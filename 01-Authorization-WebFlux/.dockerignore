@@ -1,0 +1,8 @@
+.gitignore
+.gradle/
+.idea/
+build/
+exec.sh
+exec.ps1
+README.md
+lombok.config
