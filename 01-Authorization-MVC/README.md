@@ -17,7 +17,7 @@ This sample demonstrates:
 
 ### Create an Auth0 API
 
-In the [APIs](https://manage.auth0.com/dashboard/#/apis) section of the Auth0 dashboard, click Create API. Provide a name and an identifier for your API, for example `https://quickstarts/api`. Leave the Signing Algorithm as RS256.
+In the [APIs](https://manage.auth0.com/dashboard/#/apis) section of the Auth0 dashboard, click Create API. Provide a name and an identifier for your API, for example, `https://quickstarts/api`. Leave the Signing Algorithm as RS256.
 
 ### Configure the project
 
@@ -51,7 +51,7 @@ Linux / MacOS:
 
 Windows:
 ```bash
-gradle clean bootRun
+gradlew.bat clean bootRun
 ```
 
 ### Docker
