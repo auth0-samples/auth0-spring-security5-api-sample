@@ -6,10 +6,9 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'com.gradle.build-scan' version '2.0.2'
-    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'com.gradle.build-scan' version '3.2'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id "io.freefair.lombok" version "3.7.5"
 }
 
 group = 'com.auth0'
@@ -27,7 +26,7 @@ dependencies {
     implementation 'org.springframework.security:spring-security-oauth2-jose'
     implementation 'org.springframework.security:spring-security-config'
 
-    testImplementation 'org.springframework.security:spring-security-test:5.2.1.RELEASE'
+    testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 }

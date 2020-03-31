@@ -6,10 +6,9 @@ buildscript {
 
 plugins {
     id 'java'
-    id 'com.gradle.build-scan' version '2.0.2'
-    id 'org.springframework.boot' version '2.2.4.RELEASE'
+    id 'com.gradle.build-scan' version '3.2'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-    id "io.freefair.lombok" version "3.7.5"
 }
 
 group = 'com.auth0'
