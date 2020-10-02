@@ -32,8 +32,8 @@ public class SecurityConfig {
                 .pathMatchers("/api/public").permitAll()
                 .pathMatchers("/api/private").authenticated()
                 .pathMatchers("/api/private-scoped").hasAuthority("SCOPE_read:messages")
-                .and()
-                .oauth2ResourceServer()
+                .and().cors()
+                .and().oauth2ResourceServer()
                 .jwt().and().and().build();
     }
 

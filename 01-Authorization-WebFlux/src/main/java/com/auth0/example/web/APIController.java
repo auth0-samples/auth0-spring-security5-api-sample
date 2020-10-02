@@ -2,6 +2,7 @@ package com.auth0.example.web;
 
 import com.auth0.example.model.Message;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,8 @@ import reactor.core.publisher.Mono;
  */
 @RestController
 @RequestMapping(path = "api", produces = MediaType.APPLICATION_JSON_VALUE)
+// For simplicity of this sample, allow all origins. Real applications should configure CORS for their use case.
+@CrossOrigin("*")
 public class APIController {
 
     @GetMapping(value = "/public")
