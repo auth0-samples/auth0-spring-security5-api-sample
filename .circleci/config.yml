@@ -92,12 +92,7 @@ commands:
       - run:
           name: Execute automated tests
           working_directory: test
-          command: |
-            if <<parameters.webflux>>; then
-                quickstart="spring5-webflux" npm test
-            else
-                npm test
-            fi
+          command: npm test
 
 jobs:
   checkout:
