@@ -1,0 +1,18 @@
+version: 2
+updates:
+
+  - package-ecosystem: "gradle" 
+    directory: "/01-Authorization-MVC" 
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+      
+  - package-ecosystem: "gradle" 
+    directory: "/01-Authroization-WebFlux" 
+    schedule:
+      interval: "daily"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
