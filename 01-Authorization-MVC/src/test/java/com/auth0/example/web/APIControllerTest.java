@@ -1,5 +1,6 @@
 package com.auth0.example.web;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @WebMvcTest(APIController.class)
 @RunWith(SpringRunner.class)
+@Ignore
 public class APIControllerTest {
 
     @Autowired
