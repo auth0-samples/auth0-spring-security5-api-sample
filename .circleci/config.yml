@@ -45,14 +45,6 @@ commands:
       - store_artifacts:
           path: ~/test-results/junit
 
-      # Setup environment, start the app and wait for it to come online
-      - run:
-          name: Setup Auth0 environment
-          working_directory: <<parameters.sample>>/src/main/resources/
-          command: |
-            mv application.yml.example application.yml
-            sed -i 's|{DOMAIN}|'$auth0_domain'|g' application.yml
-            sed -i 's|{API_IDENTIFIER}|'$api_identifier'|g' application.yml
       - run:
           name: Start server
           working_directory: <<parameters.sample>>
