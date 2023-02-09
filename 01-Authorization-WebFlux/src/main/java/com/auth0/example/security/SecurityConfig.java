@@ -13,7 +13,6 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 /**
  * Configures our application with Spring Security to restrict access to our API endpoints.
  */
-@EnableWebFluxSecurity
 @Configuration
 public class SecurityConfig {
 

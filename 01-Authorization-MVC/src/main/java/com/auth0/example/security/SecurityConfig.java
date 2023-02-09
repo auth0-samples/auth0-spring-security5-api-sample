@@ -15,7 +15,6 @@ import org.springframework.security.web.SecurityFilterChain;
 /**
  * Configures our application with Spring Security to restrict access to our API endpoints.
  */
-@EnableWebSecurity
 // Needed since Spring Security 6 (or Spring Boot 3)!
 @Configuration
 public class SecurityConfig {
