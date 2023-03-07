@@ -1,5 +1,8 @@
 # Auth0 Spring Security 5 API Samples
 
+> **Note**
+> If you are using Spring Boot 3 / Spring Security 6, check out the [use-spring-6 branch](https://github.com/auth0-samples/auth0-spring-security5-api-sample/tree/use-spring-6), which contains an updated version of this sample for Spring Boot 3. Also see [this issue](https://github.com/auth0-samples/auth0-spring-security5-api-sample/issues/25) for more information.
+
 [![CircleCI](https://circleci.com/gh/auth0-samples/auth0-spring-security5-api-sample.svg?style=svg)](https://circleci.com/gh/auth0-samples/auth0-spring-security5-api-sample)
 
 These samples demonstrate how to create an API with Spring Boot 2 and Spring Security 5, which only permits access to resources if a valid **access token** is included.
