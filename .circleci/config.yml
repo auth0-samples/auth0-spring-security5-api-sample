@@ -1,6 +1,6 @@
 # Common Logic
 machine: &machine-cfg
-  image: ubuntu-2004:202107-02
+  image: ubuntu-2204:2023.10.1
 
 version: 2.1
 
