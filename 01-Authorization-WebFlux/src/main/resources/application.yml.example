@@ -7,4 +7,4 @@ okta:
     # Replace with the domain of your Auth0 tenant.
     issuer: https://{DOMAIN}/
     # Replace with the API Identifier for your Auth0 API.
-    audience: {AUDIENCE}
+    audience: {API_IDENTIFIER}
