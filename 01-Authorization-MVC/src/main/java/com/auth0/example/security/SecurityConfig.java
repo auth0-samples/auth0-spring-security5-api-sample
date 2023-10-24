@@ -13,7 +13,6 @@ import static org.springframework.security.config.Customizer.withDefaults;
  * Configures our application with Spring Security to restrict access to our API endpoints.
  */
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
