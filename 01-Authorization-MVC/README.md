@@ -2,13 +2,12 @@
 
 This sample demonstrates:
 
-- Configuring a Spring Boot MVC application as a Resource Server
-- Using and extending Spring Security to validate JWTs
+- Using the [Okta Spring Boot Starter](https://github.com/okta/okta-spring-boot) to configure a Spring Boot Servlet Resource Server 
 - Protecting APIs to only allow authorized access
 
 ## Prerequisites
 
-- Java 8 or greater
+- Java 17 or greater
 - An Auth0 account
 
 ## Setup
@@ -26,16 +25,12 @@ The project needs to be configured with your Auth0 domain and API Identifier.
 To do this, first copy `src/main/resources/application.yml.example` into a new file in the same folder called `src/main/resources/application.yml`, and replace the values with your own Auth0 domain and API Identifier:
 
 ```yaml
-auth0:
-  audience: {API_IDENTIFIER}
-
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          # Note the trailing slash is important!
-          issuer-uri: https://{DOMAIN}/
+okta:
+  oauth2:
+    # Replace with the domain of your Auth0 tenant.
+    issuer: https://{DOMAIN}/
+    # Replace with the API Identifier for your Auth0 API.
+    audience: {AUDIENCE}
 ```
 
 ## Running
