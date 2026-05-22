@@ -22,7 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.okta.spring:okta-spring-boot-starter:3.0.5'
+    implementation 'com.okta.spring:okta-spring-boot-starter:3.1.0'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     testImplementation 'org.springframework.security:spring-security-test'
